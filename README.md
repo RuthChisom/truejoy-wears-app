@@ -6,3 +6,4 @@
 - login via /login route
 - only managers can update or delete users
 - only admin can view all users
+![i4gzuri_auth_task](https://user-images.githubusercontent.com/30495094/183904716-cf4cc1b5-7208-4e39-aa38-9c82b3deac8d.png)
