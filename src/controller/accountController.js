@@ -100,9 +100,11 @@ exports.loginAccount = (req, res) =>{
             console.error({err});
             return res.status(500).json({message: "Failed to sign token!"});
         }
+        //set cookie
+        res.cookie('nToken',token, {maxAge: 900000, httpOnly: true});
+        console.log(token);
         return res.status(200).json({
             message: "Logged In Successfully",
-            token
         })
     })
     
@@ -183,3 +185,18 @@ exports.deleteAccount = async(req, res) => {
 //         })
 //     }
 // }
+
+// logout of an account
+exports.logoutAccount = (req, res) =>{
+    if(!req.headers.authorization){
+        return res.status(401).json({message: "Authorization Header required"});
+    }
+    let splittedHeader = req.headers.authorization.split(' ');
+    if(splittedHeader[0] !== 'Bearer'){
+        return res.status(401).json({message: "Ensure that the Authorization Format is Bearer <token>"});
+    }
+    res.clearCookie('nToken');
+    return res.status(200).json({
+        message: "Logged Out Successfully",
+    })
+}

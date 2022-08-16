@@ -7,6 +7,7 @@ router
 .post("/register", controller.registerNewAccount)
 .post("/login", controller.loginAccount)
 .put("/:id", authenticateAccount, checkIfManager, controller.updateAccount)
+.delete("/logout", controller.logoutAccount)
 .delete("/:id", authenticateAccount, checkIfManager, controller.deleteAccount);
 
 module.exports = router;

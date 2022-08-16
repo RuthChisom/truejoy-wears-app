@@ -9,6 +9,10 @@ exports.authenticateAccount = (req, res, next) => { //next calls the next functi
     if(splittedHeader[0] !== 'Bearer'){
         return res.status(401).json({message: "Ensure that the Authorization Format is Bearer <token>"});
     }
+    //ensure that cookie is set, to verify that user is still logged in
+    if(!req.headers.cookie){
+        return res.status(401).json({message: "You have been logged out, please login"});
+    }
     let token = splittedHeader[1];
     // decode the token
     let decodedToken = decodeToken(token); 
